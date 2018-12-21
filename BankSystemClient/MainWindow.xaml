@@ -1,0 +1,59 @@
+﻿<Window x:Class="BankSystemClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystemClient"
+        mc:Ignorable="d"
+        Title="BankSystem" Height="450" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="AUTO" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="AUTO" />
+                    <ColumnDefinition Width="AUTO" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.RowSpan="2" Content=" Установить диапозон дат " TextBlock.TextAlignment="Center" Name="dateButton" Click="dateButton_Click" Grid.Column="1" />
+                <Button Grid.Row="0" Grid.RowSpan="2" Content=" Выбор репозитория " TextBlock.TextAlignment="Center" Name="changeRepositoryButton" Click="changeRepositoryButton_Click" Grid.Column="2" />
+                <DatePicker Grid.Row="0" Grid.Column="0" Name="dateStart" />
+                <DatePicker Grid.Row="1" Grid.Column="0" Name="dateEnd" />
+                <Button Visibility="Hidden" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Content="Показать список" Name="returnToStartListButton" Click="returnToStartListButton_Click" />
+                <Button Visibility="Hidden" Grid.Row="2" Grid.RowSpan="2" Grid.Column="2" Content="Отчет" Name="printButton" Click="printButton_Click" />
+                <TextBlock Visibility="Hidden" Text="Что-то" Grid.Row="2" Name="resultForPeriodTextBlock"/>
+            </Grid>
+        </StackPanel>
+        <!--<Menu Height="20" VerticalAlignment="Top">
+            <MenuItem Header="All Records" ></MenuItem>
+            <MenuItem Header="Report" ></MenuItem>
+        </Menu>-->
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="recordsGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding NameOfObject}" Header="Название операции" Width="250"/>
+                <DataGridTextColumn Binding="{Binding Ammount}" Header="Сумма" Width="150"/>
+                <DataGridTextColumn Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy \}}" Header="Дата" Width="130"/>
+                <DataGridTextColumn Binding="{Binding IsIncome}" Header="Операция поступления" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2" Height="50" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Добавить" Height="30" Name="createButton" Click="createButton_Click"/>
+            <Button Grid.Column="1" Content="Удалить" Height="30" Name="deleteButton" Click="deleteButton_Click"/>
+            <Button Grid.Column="2" Content="Обновить" Height="30" Name="refreshButton" Click="refreshButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

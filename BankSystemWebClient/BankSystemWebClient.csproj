@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app.components.ts" />
+    <None Remove="ClientApp\app\app.component.ts" />
+    <None Remove="ClientApp\app\app.module.ts" />
+    <None Remove="ClientApp\app\data.service.ts" />
+    <None Remove="ClientApp\app\filterRecords\dates.ts" />
+    <None Remove="ClientApp\app\filterRecords\reportResponse.ts" />
+    <None Remove="ClientApp\app\main.ts" />
+    <None Remove="ClientApp\app\record.ts" />
+    <None Remove="ClientApp\polyfills.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+    <PackageReference Include="Unity.Configuration" Version="5.2.5" />
+    <PackageReference Include="Unity.Container" Version="5.8.11" />
+    <PackageReference Include="Unity.Microsoft.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Unity.NetCore" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankSystemModel\BankSystemModel.csproj" />
+    <ProjectReference Include="..\CoreRepository\CoreRepository.csproj" />
+    <ProjectReference Include="..\DesktopRepository\DesktopRepository.csproj" />
+    <ProjectReference Include="..\MySqlRepository\MySqlRepository.csproj" />
+    <ProjectReference Include="..\WebRepository\WebRepository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\app.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\data.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\filterRecords\dates.ts" />
+    <TypeScriptCompile Include="ClientApp\app\filterRecords\reportResponse.ts" />
+    <TypeScriptCompile Include="ClientApp\app\record.ts" />
+    <TypeScriptCompile Include="ClientApp\main.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills.ts" />
+  </ItemGroup>
+
+</Project>

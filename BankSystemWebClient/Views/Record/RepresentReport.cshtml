@@ -1,0 +1,38 @@
+﻿@model BankSystemWebClient.Models.ReportModel
+
+@{
+    ViewData["Title"] = "RepresentReport";
+}
+
+<h2>Журнал отчетности</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RepresentReport">
+            <div asp-validation-summary="ModelOnly" class="text-danger">Начальная</div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label">Конечная дата</label>
+                <input asp-for="EndTime" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <input asp-for="EndTime" class="form-control" value="0" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Просмотреть отчет" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к панеле упарвления записями</a>
+</div>
+

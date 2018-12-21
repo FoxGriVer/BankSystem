@@ -1,0 +1,108 @@
+﻿<div *ngIf="tableMode" class="container-fluid">    
+    <div class="col-md-offset-1">
+        <h1>Список записей</h1>
+        <div class="row" style="margin-top: 2%; margin-bottom: 2%;">
+            <button type="button" class="btn btn-default" (click)="add()">Добавить запись</button>
+            <button type="button" class="btn btn-default col-md-offset-1" (click)="getReport()">Просмотреть за период</button>
+        </div>
+        <div *ngIf="reportMode">
+            <h2>Сумма за последний месяц: {{balanceForLastMonth}}</h2>
+            <h2>Сумма за данный период: {{balanceForPeriod}}</h2>
+            <input type="button" value="Отобразить весь список" class="btn btn-success" (click)="cancelReport()" />
+        </div>
+    </div>    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название операции</th>
+                <th>Сумма операции</th>
+                <th>Дата</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of records">
+                <ng-template [ngIf]="record.id != p.id" [ngIfElse]="editTemplate">
+                    <td>{{p.nameOfObject}}</td>
+                    <td>{{p.ammount}}</td>
+                    <td>{{p.date | date}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="editRecord(p)">Изменить</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="formPeriodMode">
+    <div class="col-md-offset-4">
+        <h1>Формирование отчета</h1>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Дата начала отчета</label>
+                <input type="datetime" [(ngModel)]="dates.startDate" class="form-control" placeholder="месяц/день/год" />
+            </div>
+            <div class="form-group">
+                <label>Дата окончания отчета</label>
+                <input type="datetime" [(ngModel)]="dates.endDate" class="form-control" placeholder="месяц/день/год" />
+            </div>
+            <div class="row">
+                <input type="button" value="Сохранить" (click)="getFiltredRecordsAndBalance()" class="btn btn-success" />
+                <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning col-md-offset-1" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="record.nameOfObject" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="record.ammount" class="form-control" />
+    </td>
+    <td>
+        <input type="datetime" [(ngModel)]="record.date" class="form-control" placeholder="месяц/день/год" />
+    </td>
+    <td>
+        <input type="checkbox" [(ngModel)]="record.isIncome" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+
+<div *ngIf="createMode">
+    <div class="col-md-offset-4">
+        <h1>Создание новой записи</h1>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Название записи</label>
+                <input type="text" [(ngModel)]="record.nameOfObject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Сумма</label>
+                <input type="number" [(ngModel)]="record.ammount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Дата</label>
+                <input type="datetime" [(ngModel)]="record.date" class="form-control" placeholder="месяц/день/год" />
+            </div>
+            <div class="form-group">
+                <label>Операция поступления</label>
+                <input type="checkbox" [(ngModel)]="record.isIncome" class="form-control" />
+            </div>
+            <div class="row">
+                <input type="button" value="Сохранить" (click)="save()"  class="btn btn-success" />
+                <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning col-md-offset-1" />
+            </div>
+        </div>
+    </div>
+</div>

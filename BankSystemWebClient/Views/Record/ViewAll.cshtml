@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BankSystemModel.Record>
+
+@{
+    ViewData["Title"] = "ViewAll";
+}
+
+<h2>Просмотр всех записей</h2>
+
+<p>
+    <a asp-action="Add">Создать новую запись</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название операции
+            </th>
+            <th class="text-center">
+                Сумма
+            </th>
+            <th class="text-center">
+                Дата
+            </th>
+            <th class="text-center">
+                Операция поступления
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfObject)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Ammount)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.IsIncome)
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id">Изменить</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
